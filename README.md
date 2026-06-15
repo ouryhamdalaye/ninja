@@ -1,41 +1,70 @@
-# 🥷 Ninja
+# 🥷 Ninja — MCP branch
 
-Personal dev dojo for learning, experimenting, and documenting technical explorations.
+This branch (`mcp`) is a learning lab for the [Model Context Protocol](https://modelcontextprotocol.io). It hosts a small **flight search & booking MCP server** written in TypeScript — a skeleton project to practice tools, resources, and prompts with an AI host like Cursor.
 
-This repository is a learning lab where I store small experiments, notes, prototypes, and technical discoveries while exploring new tools, concepts, and architectures.
+The parent [Ninja](https://github.com/ouryhamdalaye/ninja) repo is a personal dev dojo for experiments; this branch focuses on MCP only.
 
-The goal is not to build one single production-ready application, but to keep a structured place where I can practice, break things, understand them, and reuse what I learn later.
+## What it does
 
-## 🎯 Purpose
+An MCP server named `flight-booking` that runs over **stdio**. The host launches the process and talks JSON-RPC on stdin/stdout — no HTTP server needed for local dev.
 
-This repo is used to:
+| Capability | Name | Description |
+|------------|------|-------------|
+| Tool | `search-flights` | Search flights by origin, destination, and date |
+| Tool | `book-flight` | Book a flight and get a booking reference |
+| Tool | `get-booking` | Look up an existing booking |
+| Tool | `cancel-booking` | Cancel a booking |
+| Resource | `airports` | List of supported IATA airport codes |
+| Prompt | `plan-trip` | Guided trip-planning conversation starter |
 
-- explore new technologies
-- test small proof of concepts
-- document what I learn
-- keep useful snippets and examples
-- experiment with architecture patterns
-- compare approaches before using them in real projects
+Data is mocked in memory — this is for learning MCP patterns, not production booking.
 
-## 🧠 Topics
+## Quick start
 
-This repository may include experiments around:
+**Requirements:** Node.js 20+
 
-- MCP — Model Context Protocol
-- AI tooling and agent integrations
-- TypeScript / JavaScript
-- Python
-- backend architecture
-- API design
-- automation scripts
-- developer tooling
-- infrastructure experiments
-- random technical notes
-- others things
+```bash
+npm install
+npm run build
+npm start
+```
 
-## 🧪 Structure
+## Use with Cursor
 
-The repository may evolve over time, but the general idea is to organize experiments by topic or branch.
+After building, add the server in `.cursor/mcp.json` (already configured in this repo):
 
-## 👤 Author
+```json
+{
+  "mcpServers": {
+    "flight-booking": {
+      "command": "node",
+      "args": ["${workspaceFolder}/build/index.js"]
+    }
+  }
+}
+```
+
+Restart Cursor (or reload MCP servers), then ask the agent things like:
+
+> Search flights from CDG to JFK on 2026-07-15
+
+## Project structure
+
+```
+src/
+├── index.ts              # Server entry point
+├── tools/                # MCP tools (search, book, get, cancel)
+├── resources/            # MCP resources (airports list)
+├── prompts/              # MCP prompts (plan-trip)
+└── data/                 # Mock flights, airports, bookings
+docs/
+└── cookbook.md           # Step-by-step build guide
+```
+
+## Learn more
+
+See [docs/cookbook.md](docs/cookbook.md) for a full walkthrough of how this server was built — from empty project to working MCP integration.
+
+## Author
+
 ODI Hamd
