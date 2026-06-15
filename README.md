@@ -53,6 +53,7 @@ Restart Cursor (or reload MCP servers), then ask the agent things like:
 ```
 src/
 ├── index.ts              # Server entry point
+├── register.ts           # Wires tools, resources, and prompts onto the server
 ├── tools/                # MCP tools (search, book, get, cancel)
 ├── resources/            # MCP resources (airports list)
 ├── prompts/              # MCP prompts (plan-trip)

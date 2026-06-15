@@ -243,7 +243,8 @@ We split the project by responsibility:
 
 ```
 src/
-  index.*          → entry point, transport, wiring only
+  index.*          → entry point, transport only
+  register.*       → wires tools, resources, and prompts onto the server
   data/            → mock flights, airports, bookings (your domain)
   tools/           → one file per tool (or group of related tools)
   resources/       → resource handlers

@@ -2,20 +2,14 @@
 
 import { McpServer, StdioServerTransport } from "@modelcontextprotocol/server";
 
-import {
-  registerPrompts,
-  registerResources,
-  registerTools,
-} from "./tools/index.js";
+import { registerAll } from "./register.js";
 
 const server = new McpServer({
   name: "flight-booking",
   version: "0.1.0",
 });
 
-registerTools(server);
-registerResources(server);
-registerPrompts(server);
+registerAll(server);
 
 async function main(): Promise<void> {
   const transport = new StdioServerTransport();
