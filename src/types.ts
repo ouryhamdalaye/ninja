@@ -28,4 +28,9 @@ export interface Booking {
   currency: string;
   status: "confirmed" | "cancelled";
   bookedAt: string;
+  baggageCount?: number;
+  baggageFee?: number;
+  checkedIn?: boolean;
+  boardingPassCode?: string;
+  seat?: string;
 }

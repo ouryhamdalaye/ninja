@@ -68,6 +68,7 @@ export function registerBookFlightTool(server: McpServer): void {
         currency: flight.currency,
         status: "confirmed" as const,
         bookedAt: new Date().toISOString(),
+        seat: "12A",
       };
 
       saveBooking(booking);
